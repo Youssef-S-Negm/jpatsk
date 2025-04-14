@@ -1,5 +1,6 @@
 package com.youssef.jpatsk.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -22,12 +23,15 @@ public class Course {
     private int credit;
 
     @OneToOne(mappedBy = "course")
+    @JsonManagedReference
     private Assessment assessment;
 
     @OneToMany(mappedBy = "course")
+    @JsonManagedReference
     private Set<Rating> ratings;
 
     @ManyToMany(mappedBy = "courses")
+    @JsonManagedReference
     private Set<Author> authors;
 
     public Course() {
