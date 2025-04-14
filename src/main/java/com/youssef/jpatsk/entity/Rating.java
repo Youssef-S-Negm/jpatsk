@@ -17,6 +17,9 @@ public class Rating {
     @JoinColumn(name = "COURSE_ID")
     private Course course;
 
+    public Rating() {
+    }
+
     public Rating(Long id, Double number) {
         this.id = id;
         this.number = number;

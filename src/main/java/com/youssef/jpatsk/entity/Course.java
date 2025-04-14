@@ -30,6 +30,9 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     private Set<Author> authors;
 
+    public Course() {
+    }
+
     public Course(Long id, String name, String description, int credit) {
         this.id = id;
         this.name = name;
