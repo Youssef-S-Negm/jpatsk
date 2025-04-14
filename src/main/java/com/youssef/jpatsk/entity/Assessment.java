@@ -17,6 +17,9 @@ public class Assessment {
     @JoinColumn(name = "COURSE_ID")
     private Course course;
 
+    public Assessment() {
+    }
+
     public Assessment(Long id, String content) {
         this.id = id;
         this.content = content;

@@ -30,6 +30,9 @@ public class Author {
     )
     private Set<Course> courses;
 
+    public Author() {
+    }
+
     public Author(Long id, String name, String email, Date birthDate) {
         this.id = id;
         this.name = name;
