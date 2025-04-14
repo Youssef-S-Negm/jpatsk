@@ -1,5 +1,6 @@
 package com.youssef.jpatsk.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -28,6 +29,7 @@ public class Author {
             joinColumns = @JoinColumn(name = "AUTHOR_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
     )
+    @JsonBackReference
     private Set<Course> courses;
 
     public Author() {
