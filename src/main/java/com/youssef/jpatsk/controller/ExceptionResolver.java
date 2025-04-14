@@ -2,12 +2,14 @@ package com.youssef.jpatsk.controller;
 
 import com.youssef.jpatsk.dto.ErrorResponse;
 import com.youssef.jpatsk.exception.EntityNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
+@Hidden
 public class ExceptionResolver {
 
     @ExceptionHandler
