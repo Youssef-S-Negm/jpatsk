@@ -1,5 +1,7 @@
 package com.youssef.jpatsk.controller;
 
+import com.youssef.jpatsk.dto.AuthorDto;
+import com.youssef.jpatsk.dto.DtoMapper;
 import com.youssef.jpatsk.entity.Author;
 import com.youssef.jpatsk.service.AuthorService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorController {
 
     private final AuthorService authorService;
+    private final DtoMapper mapper;
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, DtoMapper mapper) {
         this.authorService = authorService;
+        this.mapper = mapper;
     }
 
     @GetMapping
-    public Author getAuthorByEmail(@RequestParam String email) {
-        return authorService.findByEmail(email);
+    public AuthorDto getAuthorByEmail(@RequestParam String email) {
+        return mapper.authorToAuthorDto(authorService.findByEmail(email));
     }
 
 }
