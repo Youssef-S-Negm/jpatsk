@@ -1,6 +1,8 @@
 package com.youssef.jpatsk.service;
 
 import com.youssef.jpatsk.dao.AuthorRepository;
+import com.youssef.jpatsk.dto.AuthorDto;
+import com.youssef.jpatsk.dto.DtoMapper;
 import com.youssef.jpatsk.entity.Author;
 import com.youssef.jpatsk.exception.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,19 +13,21 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
+    private final DtoMapper mapper;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, DtoMapper mapper) {
         this.authorRepository = authorRepository;
+        this.mapper = mapper;
     }
 
     @Override
-    public Author findByEmail(String email) {
+    public AuthorDto findByEmail(String email) {
         Optional<Author> result = authorRepository.findByEmail(email);
 
         if (result.isEmpty()) {
-            throw new EntityNotFoundException("Couldn't find user email - " + email);
+            throw new EntityNotFoundException("Couldn't find author email - " + email);
         }
 
-        return result.get();
+        return mapper.authorToAuthorDto(result.get());
     }
 }
