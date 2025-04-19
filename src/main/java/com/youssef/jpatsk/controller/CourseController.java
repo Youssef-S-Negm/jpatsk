@@ -16,16 +16,14 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
-    private final DtoMapper mapper;
 
-    public CourseController(CourseService courseService, DtoMapper mapper) {
+    public CourseController(CourseService courseService) {
         this.courseService = courseService;
-        this.mapper = mapper;
     }
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "2") int limit) {
-        return mapper.coursesToCoursesDto(courseService.findAll(page, limit));
+        return courseService.findAll(page, limit);
     }
 }
