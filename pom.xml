@@ -29,6 +29,14 @@
     <properties>
         <java.version>24</java.version>
         <org.mapstruct.version>1.6.2</org.mapstruct.version>
+        <sonar.projectKey>JPA-Task</sonar.projectKey>
+        <sonar.projectName>JPA Task</sonar.projectName>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.token>sqp_6e28646e94159c3f0ad935ee6d6ee0270a52e6d0</sonar.token>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.exclusions>**/entity/**/*.java, **/dto/**/*.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -108,7 +116,7 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>test</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
@@ -120,6 +128,12 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.1.0.4751</version>
             </plugin>
         </plugins>
     </build>
