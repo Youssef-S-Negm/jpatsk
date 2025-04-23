@@ -4,7 +4,7 @@ import com.youssef.jpatsk.entity.Assessment;
 import com.youssef.jpatsk.entity.Author;
 import com.youssef.jpatsk.entity.Rating;
 
-import java.util.Set;
+import java.util.List;
 
 public class CourseDto {
 
@@ -13,8 +13,8 @@ public class CourseDto {
     private String description;
     private int credit;
     private Assessment assessment;
-    private Set<Rating> ratings;
-    private Set<Author> authors;
+    private List<Rating> ratings;
+    private List<Author> authors;
 
     public Long getId() {
         return id;
@@ -56,19 +56,19 @@ public class CourseDto {
         this.assessment = assessment;
     }
 
-    public Set<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
 
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 }
