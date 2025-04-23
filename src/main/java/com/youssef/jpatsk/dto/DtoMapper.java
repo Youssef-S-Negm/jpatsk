@@ -13,4 +13,7 @@ public interface DtoMapper {
 
     AuthorDto authorToAuthorDto(Author author);
 
+    CourseDto courseToDto(Course course);
+
+    Course dtoToCourse(CourseDto dto);
 }
