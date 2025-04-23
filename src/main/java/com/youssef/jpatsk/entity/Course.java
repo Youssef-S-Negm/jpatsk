@@ -3,14 +3,14 @@ package com.youssef.jpatsk.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "T_COURSE")
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")
@@ -28,11 +28,11 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     @JsonManagedReference
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
 
     @ManyToMany(mappedBy = "courses")
     @JsonManagedReference
-    private Set<Author> authors;
+    private List<Author> authors;
 
     public Course() {
     }
@@ -64,19 +64,19 @@ public class Course {
         this.assessment = assessment;
     }
 
-    public Set<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
 
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 

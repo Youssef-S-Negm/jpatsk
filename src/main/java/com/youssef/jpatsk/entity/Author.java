@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "T_AUTHOR")
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")
@@ -30,7 +30,7 @@ public class Author {
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
     )
     @JsonBackReference
-    private Set<Course> courses;
+    private List<Course> courses;
 
     public Author() {
     }
@@ -74,11 +74,11 @@ public class Author {
         this.birthDate = birthDate;
     }
 
-    public Set<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }
