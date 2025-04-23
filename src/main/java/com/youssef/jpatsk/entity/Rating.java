@@ -16,7 +16,7 @@ public class Rating {
 
     @ManyToOne
     @JoinColumn(name = "COURSE_ID")
-    @JsonBackReference
+//    @JsonBackReference
     private Course course;
 
     public Rating() {

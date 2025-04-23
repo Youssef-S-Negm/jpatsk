@@ -29,7 +29,6 @@ public class Author {
             joinColumns = @JoinColumn(name = "AUTHOR_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
     )
-    @JsonBackReference
     private List<Course> courses;
 
     public Author() {

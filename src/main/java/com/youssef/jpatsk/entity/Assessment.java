@@ -16,7 +16,6 @@ public class Assessment {
 
     @OneToOne
     @JoinColumn(name = "COURSE_ID")
-    @JsonBackReference
     private Course course;
 
     public Assessment() {

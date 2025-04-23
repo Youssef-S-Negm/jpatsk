@@ -23,15 +23,12 @@ public class Course {
     private int credit;
 
     @OneToOne(mappedBy = "course")
-    @JsonManagedReference
     private Assessment assessment;
 
     @OneToMany(mappedBy = "course")
-    @JsonManagedReference
     private List<Rating> ratings;
 
     @ManyToMany(mappedBy = "courses")
-    @JsonManagedReference
     private List<Author> authors;
 
     public Course() {
