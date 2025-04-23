@@ -1,7 +1,6 @@
 package com.youssef.jpatsk.dto;
 
 import java.util.Date;
-import java.util.List;
 
 public class AuthorDto {
 
@@ -9,7 +8,6 @@ public class AuthorDto {
     private String name;
     private String email;
     private Date birthDate;
-    private List<CourseDto> courses;
 
     public Long getId() {
         return id;
@@ -41,13 +39,5 @@ public class AuthorDto {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public List<CourseDto> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<CourseDto> courses) {
-        this.courses = courses;
     }
 }
