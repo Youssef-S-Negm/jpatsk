@@ -34,3 +34,7 @@ INSERT INTO T_RATING (NUMBER, COURSE_ID) VALUES
 (5.0, 3),
 (4.1, 4),
 (3.5, 4);
+
+INSERT INTO T_USER (ID, USERNAME, PASSWORD) VALUES
+(1, 'user1', '$2a$10$f/Z.WFQsttWQOmwWhXBz6ekFz0zBPdVCd/bn0U9q2twB/cfryZE9i'),
+(2, 'user2', '$2a$10$HtPMg8sfdWrKUAcPcehZvOlH.J7XwYCczywuz3Vg8luIUc02XGufa');
