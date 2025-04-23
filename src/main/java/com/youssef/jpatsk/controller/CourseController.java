@@ -1,13 +1,10 @@
 package com.youssef.jpatsk.controller;
 
 import com.youssef.jpatsk.dto.CourseDto;
-import com.youssef.jpatsk.dto.DtoMapper;
-import com.youssef.jpatsk.entity.Course;
 import com.youssef.jpatsk.service.CourseService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,27 @@ public class CourseController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<CourseDto> getCourses(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "2") int limit) {
         return courseService.findAll(page, limit);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<CourseDto> addCourse(@RequestBody CourseDto course) {
+        return new ResponseEntity<>(courseService.add(course), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CourseDto> updateCourse(@PathVariable Long id,
+                                                  @RequestBody CourseDto course) {
+        return ResponseEntity.ok(courseService.update(id, course));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<CourseDto> deleteCourseById(@PathVariable Long id) {
+        courseService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
