@@ -8,4 +8,10 @@ public interface CourseService {
 
     List<CourseDto> findAll(int page, int limit);
 
+    CourseDto add(CourseDto course);
+
+    CourseDto update(Long id, CourseDto course);
+
+    void delete(Long id);
+
 }

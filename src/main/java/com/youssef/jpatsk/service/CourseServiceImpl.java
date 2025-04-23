@@ -27,4 +27,24 @@ public class CourseServiceImpl implements CourseService {
 
         return mapper.coursesToCoursesDto(coursePage.stream().toList());
     }
+
+    @Override
+    public CourseDto add(CourseDto course) {
+        Course courseEntity = mapper.dtoToCourse(course);
+
+        return mapper.courseToDto(courseRepository.save(courseEntity));
+    }
+
+    @Override
+    public CourseDto update(Long id, CourseDto course) {
+        Course courseEntity = mapper.dtoToCourse(course);
+        courseEntity.setId(id);
+
+        return mapper.courseToDto(courseRepository.save(courseEntity));
+    }
+
+    @Override
+    public void delete(Long id) {
+        courseRepository.deleteById(id);
+    }
 }
