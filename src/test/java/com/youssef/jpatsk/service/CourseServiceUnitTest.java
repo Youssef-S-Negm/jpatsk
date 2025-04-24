@@ -15,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -66,5 +68,60 @@ public class CourseServiceUnitTest {
 
         verify(repository).findAll(PageRequest.of(1, 1));
         verify(mapper).coursesToCoursesDto(List.of());
+    }
+
+    @Test
+    public void addCourse_returnsCourseDto() {
+        Course course = new Course(1L, "Test Course", "Test Description", 3);
+
+        CourseDto courseToBeAdded = new CourseDto();
+        courseToBeAdded.setName("Test Course");
+        courseToBeAdded.setDescription("Test description");
+        courseToBeAdded.setCredit(3);
+        courseToBeAdded.setId(1L);
+
+        when(repository.save(any(Course.class))).thenReturn(course);
+        when(mapper.dtoToCourse(any(CourseDto.class))).thenReturn(course);
+        when(mapper.courseToDto(any(Course.class))).thenReturn(courseToBeAdded);
+
+        CourseDto addedCourse = courseService.add(courseToBeAdded);
+
+        assertNotNull(addedCourse);
+        assertEquals("Test Course", addedCourse.getName());
+
+        verify(repository).save(any(Course.class));
+        verify(mapper).dtoToCourse(any(CourseDto.class));
+        verify(mapper).courseToDto(any(Course.class));
+    }
+
+    @Test
+    public void updateCourse_returnsCourseDto() {
+        CourseDto courseToBeUpdated = new CourseDto();
+        courseToBeUpdated.setId(1L);
+        courseToBeUpdated.setCredit(3);
+        courseToBeUpdated.setName("Test Course");
+        courseToBeUpdated.setDescription("Test Description");
+
+        Course course = new Course(1L, "Test Course", "Test Description", 3);
+
+        when(repository.save(any())).thenReturn(course);
+        when(mapper.dtoToCourse(any())).thenReturn(course);
+        when(mapper.courseToDto(any())).thenReturn(courseToBeUpdated);
+
+        CourseDto updatedCourse = courseService.update(1L, courseToBeUpdated);
+
+        assertNotNull(updatedCourse);
+        assertEquals("Test Course", courseToBeUpdated.getName());
+
+        verify(repository).save(any());
+        verify(mapper).dtoToCourse(any());
+        verify(mapper).courseToDto(any());
+    }
+
+    @Test
+    public void deleteCourse_returnsVoid() {
+        courseService.delete(1L);
+
+        verify(repository).deleteById(any());
     }
 }
