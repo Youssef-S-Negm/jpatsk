@@ -19,24 +19,23 @@ public class CourseController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<CourseDto> getCourses(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "2") int limit) {
         return courseService.findAll(page, limit);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<CourseDto> addCourse(@RequestBody CourseDto course) {
         return new ResponseEntity<>(courseService.add(course), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CourseDto> updateCourse(@PathVariable Long id,
                                                   @RequestBody CourseDto course) {
         return ResponseEntity.ok(courseService.update(id, course));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<CourseDto> deleteCourseById(@PathVariable Long id) {
         courseService.delete(id);
 
