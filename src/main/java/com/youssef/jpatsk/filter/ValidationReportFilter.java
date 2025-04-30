@@ -1,4 +1,4 @@
-package com.youssef.jpatsk.security.filter;
+package com.youssef.jpatsk.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
