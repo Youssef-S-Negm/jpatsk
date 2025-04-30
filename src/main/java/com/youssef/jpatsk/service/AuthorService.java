@@ -1,9 +1,9 @@
 package com.youssef.jpatsk.service;
 
-import com.youssef.jpatsk.entity.Author;
+import com.youssef.jpatsk.dto.AuthorDto;
 
 public interface AuthorService {
 
-    Author findByEmail(String email);
+    AuthorDto findByEmail(String email);
 
 }
