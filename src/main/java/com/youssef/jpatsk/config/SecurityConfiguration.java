@@ -1,9 +1,10 @@
-package com.youssef.jpatsk.security;
+package com.youssef.jpatsk.config;
 
-import com.youssef.jpatsk.security.filter.ValidationReportFilter;
+import com.youssef.jpatsk.filter.ValidationReportFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,7 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfiguration {
@@ -24,7 +26,7 @@ public class SecurityConfiguration {
     @Order(1)
     public SecurityFilterChain noAuthSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/courses")
+                .securityMatcher(new AntPathRequestMatcher("/courses", HttpMethod.GET.name()))
                 .authorizeHttpRequests(request ->
                         request.anyRequest().permitAll()
                 );
@@ -38,14 +40,14 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(request ->
                         request
-                                .requestMatchers("/courses/add",
-                                        "/courses/update/**",
-                                        "/courses/delete/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/courses").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/courses/**").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/courses/**").authenticated()
                                 .anyRequest().denyAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterAfter(new ValidationReportFilter(), AnonymousAuthenticationFilter.class);
+                .addFilterAfter(new ValidationReportFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
