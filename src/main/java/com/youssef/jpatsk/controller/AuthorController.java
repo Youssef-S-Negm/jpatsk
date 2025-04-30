@@ -1,7 +1,12 @@
 package com.youssef.jpatsk.controller;
 
 import com.youssef.jpatsk.dto.AuthorDto;
+import com.youssef.jpatsk.dto.ErrorResponse;
 import com.youssef.jpatsk.service.AuthorService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +22,21 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Found author by email",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = AuthorDto.class)
+                            )}
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "No author found with specified email",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorResponse.class))
+                    })
+    })
     @GetMapping
     public AuthorDto getAuthorByEmail(@RequestParam String email) {
         return authorService.findByEmail(email);
