@@ -1,6 +1,6 @@
 package com.youssef.jpatsk.controller;
 
-import com.youssef.jpatsk.entity.Course;
+import com.youssef.jpatsk.dto.CourseDto;
 import com.youssef.jpatsk.service.CourseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<Course> getCourses(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "2") int limit) {
+    public List<CourseDto> getCourses(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "2") int limit) {
         return courseService.findAll(page, limit);
     }
 }

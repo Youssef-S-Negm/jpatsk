@@ -1,6 +1,8 @@
 package com.youssef.jpatsk.service;
 
 import com.youssef.jpatsk.dao.CourseRepository;
+import com.youssef.jpatsk.dto.CourseDto;
+import com.youssef.jpatsk.dto.DtoMapper;
 import com.youssef.jpatsk.entity.Course;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,15 +14,17 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+    private final DtoMapper mapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, DtoMapper mapper) {
         this.courseRepository = courseRepository;
+        this.mapper = mapper;
     }
 
     @Override
-    public List<Course> findAll(int page, int limit) {
+    public List<CourseDto> findAll(int page, int limit) {
         Page<Course> coursePage = courseRepository.findAll(PageRequest.of(page, limit));
 
-        return coursePage.stream().toList();
+        return mapper.coursesToCoursesDto(coursePage.stream().toList());
     }
 }
