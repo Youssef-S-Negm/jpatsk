@@ -10,10 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DtoMapper {
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "credit", source = "credit")
     List<CourseDto> coursesToCoursesDto(List<Course> courses);
 
     @Mapping(target = "id", source = "id")
